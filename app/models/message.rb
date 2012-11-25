@@ -1,7 +1,8 @@
 class Message < Notification
-  attr_accessible :attachment
+  attr_accessible :attachments_attributes 
 
   belongs_to :conversation, :validate => true, :autosave => true
+  has_many :message_attachments, :dependent => :destroy
   validates_presence_of :sender
 
   class_attribute :on_deliver_callback
@@ -9,8 +10,6 @@ class Message < Notification
   scope :conversation, lambda { |conversation|
     where(:conversation_id => conversation.id)
   }
-
-  mount_uploader :attachment, AttachmentUploader
   
   include Concerns::ConfigurableMailer
 
