@@ -21,7 +21,7 @@ class Mailboxer::InstallGenerator < Rails::Generators::Base #:nodoc:
       migrations = [["20110511145103_create_mailboxer.rb","create_mailboxer.rb"],
                     ["20110719110700_add_notified_object.rb","add_notified_object.rb"],
                     ["20110912163911_add_notification_code.rb","add_notification_code.rb"],
-                    ["/db/migrate/20121125104117_message_attachment.rb","message_attachment.rb"]]
+                    ["20121125110946_create_message_attachments.rb","create_message_attachments.rb"]]
       migrations.each do |migration|
         migration_template "../../../../db/migrate/" + migration[0], "db/migrate/" + migration[1]
       end
