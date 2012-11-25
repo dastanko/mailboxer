@@ -1,10 +1,12 @@
 class Message < Notification
-  attr_accessible :attachments_attributes 
+  attr_accessible :message_attachments_attributes
 
   belongs_to :conversation, :validate => true, :autosave => true
   has_many :message_attachments, :dependent => :destroy
-  validates_presence_of :sender
 
+  accepts_nested_attributes_for :message_attachments, :reject_if => :all_blank
+
+  validates_presence_of :sender
   class_attribute :on_deliver_callback
   protected :on_deliver_callback
   scope :conversation, lambda { |conversation|
